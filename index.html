@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECO-ROUTE | Hyperlocal Waste Flow Optimization & Circular Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ecogreen: {
+                            50: '#f2f9f5',
+                            100: '#e1f2e7',
+                            500: '#2E8B57',
+                            600: '#246E44',
+                            700: '#1B5333',
+                            900: '#0E2A1A',
+                        },
+                        ecolight: '#8FBC8F',
+                        ecoteal: '#14b8a6',
+                        ecolime: '#84cc16'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        html { scroll-behavior: smooth; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #8FBC8F; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #2E8B57; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased custom-scrollbar">
+
+    <nav class="bg-gradient-to-r from-emerald-700 via-ecogreen-500 to-teal-600 text-white shadow-xl sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-white p-2.5 rounded-xl shadow-md flex items-center justify-center">
+                        <i class="fa-solid fa-route text-ecogreen-500 text-2xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-extrabold tracking-tight block"><span class="text-yellow-300">ECO</span>-ROUTE</span>
+                        <span class="text-[10px] uppercase tracking-widest block text-emerald-100 font-medium">Circular Waste Ecosystem</span>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-1 lg:space-x-2 font-semibold">
+                    <button onclick="switchSection('home')" id="nav-home" class="nav-link px-4 py-2 rounded-xl text-yellow-300 bg-emerald-800/50 transition flex items-center space-x-2">
+                        <i class="fa-solid fa-house text-sm"></i> <span>Home</span>
+                    </button>
+                    <button onclick="switchSection('about')" id="nav-about" class="nav-link px-4 py-2 rounded-xl text-emerald-50 hover:bg-emerald-600/30 hover:text-white transition flex items-center space-x-2">
+                        <i class="fa-solid fa-circle-info text-sm"></i> <span>About Us</span>
+                    </button>
+                    <button onclick="switchSection('shop')" id="nav-shop" class="nav-link px-4 py-2 rounded-xl text-emerald-50 hover:bg-emerald-600/30 hover:text-white transition flex items-center space-x-2">
+                        <i class="fa-solid fa-store text-sm"></i> <span>Shop</span>
+                    </button>
+                    <button onclick="switchSection('account')" id="nav-account" class="nav-link px-4 py-2 rounded-xl text-emerald-50 hover:bg-emerald-600/30 hover:text-white transition flex items-center space-x-2">
+                        <i class="fa-solid fa-circle-user text-sm"></i> <span>Account</span>
+                    </button>
+                </div>
+
+                <div class="flex items-center">
+                    <div id="session-badge" class="bg-emerald-800/60 border border-emerald-500/30 rounded-full px-4 py-1.5 text-xs font-medium flex items-center space-x-2">
+                        <span class="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>
+                        <span id="session-text">Guest Mode (Not Logged In)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <section id="sec-home" class="section-target block space-y-16">
+            <div class="flex flex-col lg:flex-row items-center gap-12 bg-white rounded-3xl p-8 lg:p-12 shadow-xl border border-slate-100 relative overflow-hidden">
+                <div class="absolute -right-16 -top-16 w-64 h-64 bg-emerald-50 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -left-16 -bottom-16 w-64 h-64 bg-teal-50 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="lg:w-1/2 space-y-6 relative z-10">
+                    <div class="inline-flex items-center space-x-2 bg-emerald-50 border border-emerald-200/60 text-ecogreen-600 font-bold px-4 py-1.5 rounded-full text-xs uppercase tracking-wider shadow-sm">
+                        <i class="fa-solid fa-trophy"></i> <span>No. 1 Waste Management System</span>
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+                        ECO-ROUTE <br>
+                        <span class="bg-gradient-to-r from-ecogreen-500 to-teal-600 bg-clip-text text-transparent text-2xl sm:text-3xl font-bold block mt-2">
+                            Smart Routing for Sustainable Waste
+                        </span>
+                    </h1>
+                    <p class="text-slate-600 text-lg leading-relaxed">
+                        An integrated hyperlocal digital platform designed to orchestrate the flow of the waste supply chain across facilities and stakeholders, supported by a circular marketplace for waste-derived products to massively minimize landfill loads.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-2">
+                        <div class="flex items-center space-x-3 text-slate-700 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                            <i class="fa-solid fa-map-location-dot text-ecogreen-500 text-xl"></i>
+                            <span class="text-xs font-semibold">Real-time Routing Optimized</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-slate-700 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                            <i class="fa-solid fa-chart-pie text-teal-500 text-xl"></i>
+                            <span class="text-xs font-semibold">Data-driven Waste Analytics</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-slate-700 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                            <i class="fa-solid fa-recycle text-ecolime text-xl"></i>
+                            <span class="text-xs font-semibold">Waste-to-Wealth Valuation</span>
+                        </div>
+                    </div>
+                    <div class="pt-4 flex flex-wrap gap-4">
+                        <button onclick="switchSection('account')" class="bg-gradient-to-r from-ecogreen-500 to-emerald-600 text-white font-bold px-8 py-4 rounded-xl hover:shadow-lg hover:shadow-emerald-600/20 transform hover:-translate-y-0.5 transition duration-200">
+                            Explore Now! <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                        <button onclick="switchSection('about')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-6 py-4 rounded-xl transition duration-200">
+                            Learn Supply Chain SOP
+                        </button>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 w-full">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-emerald-500 to-teal-400 rounded-2xl transform rotate-3 scale-102 opacity-10 shadow-lg"></div>
+                        <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=800&q=80" alt="Waste Sorting Management" class="rounded-2xl shadow-2xl border border-slate-200 object-cover w-full h-[400px] relative z-10">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-slate-900 to-ecogreen-900 text-white rounded-3xl p-8 shadow-xl relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                <div class="relative z-10 space-y-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-700/60 pb-4">
+                        <div>
+                            <h3 class="text-xl font-bold tracking-tight">Live Impact Analytics: Coblong Cluster, Bandung</h3>
+                            <p class="text-xs text-slate-400">Real-time data updates based on daily circular waste generation</p>
+                        </div>
+                        <span class="bg-teal-500/20 border border-teal-500 text-teal-300 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider mt-2 md:mt-0">Active System</span>
+                    </div>
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="bg-slate-800/40 border border-slate-700/50 p-5 rounded-2xl text-center">
+                            <span class="text-xs text-slate-400 block mb-1">Landfill Load Reduction Target</span>
+                            <span class="text-3xl font-extrabold text-yellow-300 block">35%</span>
+                        </div>
+                        <div class="bg-slate-800/40 border border-slate-700/50 p-5 rounded-2xl text-center">
+                            <span class="text-xs text-slate-400 block mb-1">Managed Waste (This Month)</span>
+                            <span class="text-3xl font-extrabold text-teal-300 block">1,845 <span class="text-sm font-normal text-slate-300">kg</span></span>
+                        </div>
+                        <div class="bg-slate-800/40 border border-slate-700/50 p-5 rounded-2xl text-center">
+                            <span class="text-xs text-slate-400 block mb-1">Allocation Accuracy Rate</span>
+                            <span class="text-3xl font-extrabold text-emerald-400 block">89.4%</span>
+                        </div>
+                        <div class="bg-slate-800/40 border border-slate-700/50 p-5 rounded-2xl text-center">
+                            <span class="text-xs text-slate-400 block mb-1">Marketplace Transactions</span>
+                            <span class="text-3xl font-extrabold text-purple-300 block">64 <span class="text-sm font-normal text-slate-300">Completed</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="sec-about" class="section-target hidden space-y-12">
+            <div class="bg-white rounded-3xl p-8 lg:p-10 shadow-md border border-slate-100 space-y-6">
+                <div class="border-l-4 border-ecogreen-500 pl-4">
+                    <h2 class="text-2xl font-bold text-slate-900">Strategic Background & Key Issues</h2>
+                    <p class="text-xs text-slate-500">The rationale behind the Eco-Route program in Bandung City</p>
+                </div>
+                <p class="text-slate-600 leading-relaxed">
+                    Bandung City is currently in a prolonged waste emergency with daily volumes reaching 1,500 tons, resulting in a <span class="font-bold text-red-600">786% Overcapacity at the Sarimukti Landfill</span>. The failure of decentralization systems at the regional level is caused by crucial mid-level infrastructure like <span class="font-semibold text-ecogreen-600">Sadang Serang TPS3R</span> and local Waste Banks not being optimally utilized due to circular coordination constraints, micro-logistics limitations, and low public sorting literacy. High-economic-value waste is dumped directly into the landfill, paralyzing the circular green economy chain in the Coblong area.
+                </p>
+                <div class="bg-emerald-50 rounded-2xl p-5 border border-emerald-100 text-sm flex items-start space-x-3 text-ecogreen-700">
+                    <i class="fa-solid fa-lightbulb text-xl mt-0.5 text-amber-500"></i>
+                    <div>
+                        <span class="font-bold block mb-0.5">Eco-Route Sustainable Solution:</span>
+                        The system does not require the construction of new heavy physical infrastructure, but rather optimizes the remaining holding capacity of processing units and accelerates the downstream distribution integration of recycled products to local urban farming and creative industry practitioners in an integrated manner.
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <div class="text-center max-w-xl mx-auto space-y-2">
+                    <h3 class="text-xl font-bold text-slate-900">Standard Operating Procedures (SOP)</h3>
+                    <p class="text-xs text-slate-500">End-to-end integration flow of Eco-Route circular waste processing</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-4 relative">
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 space-y-3 relative">
+                        <span class="absolute -top-3 -left-3 w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-500 to-ecogreen-600 text-white font-black text-sm flex items-center justify-center shadow-md">1</span>
+                        <div class="text-ecogreen-500 text-2xl"><i class="fa-solid fa-box-tissue"></i></div>
+                        <h4 class="font-bold text-sm text-slate-900">Source Sorting</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Domestic/business sectors strictly sort organic & inorganic waste into specific QR-coded containers.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 space-y-3 relative">
+                        <span class="absolute -top-3 -left-3 w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-500 to-ecogreen-600 text-white font-black text-sm flex items-center justify-center shadow-md">2</span>
+                        <div class="text-teal-500 text-2xl"><i class="fa-solid fa-truck-ramp-box"></i></div>
+                        <h4 class="font-bold text-sm text-slate-900">Smart Micro-Routing</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Logistics receive the most optimal pickup route from the system algorithm to save fuel.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 space-y-3 relative">
+                        <span class="absolute -top-3 -left-3 w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-500 to-ecogreen-600 text-white font-black text-sm flex items-center justify-center shadow-md">3</span>
+                        <div class="text-blue-500 text-2xl"><i class="fa-solid fa-building-shield"></i></div>
+                        <h4 class="font-bold text-sm text-slate-900">TPS3R Pre-Processing</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Sadang Serang TPS3R performs load verification, mechanical shredding, and quality stabilization.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 space-y-3 relative">
+                        <span class="absolute -top-3 -left-3 w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-500 to-ecogreen-600 text-white font-black text-sm flex items-center justify-center shadow-md">4</span>
+                        <div class="text-ecolime text-2xl"><i class="fa-solid fa-seedling"></i></div>
+                        <h4 class="font-bold text-sm text-slate-900">Community Conversion</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Urban Farming/Recycling communities convert raw materials into mature compost, biogas, or creative products.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 space-y-3 relative">
+                        <span class="absolute -top-3 -left-3 w-8 h-8 rounded-xl bg-gradient-to-br from-emerald-500 to-ecogreen-600 text-white font-black text-sm flex items-center justify-center shadow-md">5</span>
+                        <div class="text-amber-500 text-2xl"><i class="fa-solid fa-money-bill-trend-up"></i></div>
+                        <h4 class="font-bold text-sm text-slate-900">Circular Market</h4>
+                        <p class="text-slate-500 text-xs leading-relaxed">Products are ready to be resold through the circular marketplace platform to self-fund the ecosystem.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="sec-shop" class="section-target hidden space-y-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
+                <div>
+                    <h2 class="text-xl font-extrabold text-slate-900">Circular Economy Marketplace</h2>
+                    <p class="text-xs text-slate-500">Buying circular processed products directly funds local waste management heroes</p>
+                </div>
+                
+                <div class="flex space-x-2 bg-slate-100 p-1.5 rounded-xl border border-slate-200">
+                    <button onclick="filterShop('all')" id="tab-all" class="px-4 py-2 text-xs font-bold rounded-lg bg-white text-ecogreen-600 shadow-sm transition">All</button>
+                    <button onclick="filterShop('organic')" id="tab-organic" class="px-4 py-2 text-xs font-bold rounded-lg text-slate-600 hover:bg-slate-200/60 transition">Organic</button>
+                    <button onclick="filterShop('inorganic')" id="tab-inorganic" class="px-4 py-2 text-xs font-bold rounded-lg text-slate-600 hover:bg-slate-200/60 transition">Inorganic</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="prod-card item-organic bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col">
+                    <div class="relative h-48 bg-slate-100">
+                        <img src="compost.jpg" alt="Super Premium Compost Fertilizer" class="w-full h-full object-cover">
+                        <span class="absolute top-3 left-3 bg-emerald-600 text-white font-bold text-[10px] uppercase tracking-wide px-2.5 py-1 rounded-md shadow-sm">Organic</span>
+                        <span class="absolute bottom-3 right-3 bg-slate-900/80 text-teal-300 font-medium text-[10px] px-2 py-0.5 rounded backdrop-blur-sm"><i class="fa-solid fa-leaf"></i> Reduces 4kg of Waste</span>
+                    </div>
+                    <div class="p-5 space-y-4 flex-1 flex flex-col justify-between">
+                        <div class="space-y-1">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">By: Coblong Independent Compost</span>
+                            <h3 class="font-bold text-slate-900 text-base line-clamp-1">Super Premium Compost Fertilizer</h3>
+                            <p class="text-xs text-slate-500 line-clamp-2">Organic fertilizer resulting from the maturation of the Sadang Serang biopond brick aeration composting process. Extremely rich in macro nutrients.</p>
+                        </div>
+                        <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] text-slate-400 block">Price / kg</span>
+                                <span class="text-lg font-black text-ecogreen-600">Rp 15.000</span>
+                            </div>
+                            <button onclick="openProductModal('Super Premium Compost Fertilizer', 'Rp 15.000', 'Coblong Independent Compost', 'The best organic fertilizer resulting from the controlled decomposition of Coblong cluster household food waste. Has SNI standard C/N ratio, free from harmful pathogens, and rich in phosphate-solubilizing microbes to accelerate the restructuring of hard soil.', 'compost.jpg')" class="bg-gradient-to-r from-ecogreen-500 to-emerald-600 text-white font-bold text-xs px-4 py-2.5 rounded-lg hover:shadow-md transition">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prod-card item-organic bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col">
+                    <div class="relative h-48 bg-slate-100">
+                        <img src="magot.jpg" alt="High Protein Dried BSF Maggots" class="w-full h-full object-cover">
+                        <span class="absolute top-3 left-3 bg-emerald-600 text-white font-bold text-[10px] uppercase tracking-wide px-2.5 py-1 rounded-md shadow-sm">Organic</span>
+                        <span class="absolute bottom-3 right-3 bg-slate-900/80 text-teal-300 font-medium text-[10px] px-2 py-0.5 rounded backdrop-blur-sm"><i class="fa-solid fa-leaf"></i> Reduces 12kg of Waste</span>
+                    </div>
+                    <div class="p-5 space-y-4 flex-1 flex flex-col justify-between">
+                        <div class="space-y-1">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">By: BSF Bio-Conversion Cluster</span>
+                            <h3 class="font-bold text-slate-900 text-base line-clamp-1">High Protein Dried BSF Maggots</h3>
+                            <p class="text-xs text-slate-500 line-clamp-2">Extra premium animal feed resulting from organic waste conversion cultivation using Black Soldier Fly larvae.</p>
+                        </div>
+                        <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] text-slate-400 block">Price / pack</span>
+                                <span class="text-lg font-black text-ecogreen-600">Rp 35.000</span>
+                            </div>
+                            <button onclick="openProductModal('High Protein Dried BSF Maggots', 'Rp 35.000', 'BSF Bio-Conversion Cluster', 'High-protein dried maggots (min 45%) dried with a low-temperature oven machine to lock in essential nutrients for ornamental fish, poultry, and reptiles. Born from the daily utilization of cafe food waste.', 'magot.jpg')" class="bg-gradient-to-r from-ecogreen-500 to-emerald-600 text-white font-bold text-xs px-4 py-2.5 rounded-lg hover:shadow-md transition">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prod-card item-inorganic bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col">
+                    <div class="relative h-48 bg-slate-100">
+                        <img src="bags.jpg" alt="Upcycled Handmade Tote Bag" class="w-full h-full object-cover">
+                        <span class="absolute top-3 left-3 bg-blue-600 text-white font-bold text-[10px] uppercase tracking-wide px-2.5 py-1 rounded-md shadow-sm">Inorganic</span>
+                        <span class="absolute bottom-3 right-3 bg-slate-900/80 text-teal-300 font-medium text-[10px] px-2 py-0.5 rounded backdrop-blur-sm"><i class="fa-solid fa-leaf"></i> Saves Plastic</span>
+                    </div>
+                    <div class="p-5 space-y-4 flex-1 flex flex-col justify-between">
+                        <div class="space-y-1">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">By: Coblong Upcycle Creative</span>
+                            <h3 class="font-bold text-slate-900 text-base line-clamp-1">Upcycled Handmade Tote Bag</h3>
+                            <p class="text-xs text-slate-500 line-clamp-2">A highly durable, stylish aesthetic shopping bag hand-woven from clean plastic packaging waste.</p>
+                        </div>
+                        <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] text-slate-400 block">Price / pcs</span>
+                                <span class="text-lg font-black text-ecogreen-600">Rp 45.000</span>
+                            </div>
+                            <button onclick="openProductModal('Upcycled Handmade Tote Bag', 'Rp 45.000', 'Coblong Upcycle Creative', 'Versatile eco-friendly bag produced by fostered independent tailors\' upcycling industry. Through strict sterilization stages, precise pattern cutting, and double stitching with inner canvas lining for durable daily use.', 'bags.png')" class="bg-gradient-to-r from-ecogreen-500 to-emerald-600 text-white font-bold text-xs px-4 py-2.5 rounded-lg hover:shadow-md transition">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="sec-account" class="section-target hidden space-y-12">
+            
+            <div id="auth-panel" class="space-y-8 block">
+                <div class="text-center max-w-lg mx-auto space-y-2">
+                    <h2 class="text-2xl font-black text-slate-900">Select Portal Access Gate</h2>
+                    <p class="text-xs text-slate-500">The Eco-Route system detects unique access rights to display integrated operational dashboards for each role.</p>
+                </div>
+
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                    <button onclick="selectRole('Domestic / Business')" id="role-btn-domestic" class="role-selector-card bg-white p-6 rounded-2xl border-2 border-transparent hover:border-ecogreen-500 text-center shadow-sm hover:shadow-md transition duration-200 group">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-ecogreen-500 flex items-center justify-center mx-auto mb-3 group-hover:bg-ecogreen-500 group-hover:text-white transition">
+                            <i class="fa-solid fa-house-user text-xl"></i>
+                        </div>
+                        <span class="font-bold text-xs text-slate-800 block">Domestic / Business</span>
+                        <span class="text-[10px] text-slate-400 mt-1 block">Waste Source</span>
+                    </button>
+                    <button onclick="selectRole('Logistic Team')" id="role-btn-logistic" class="role-selector-card bg-white p-6 rounded-2xl border-2 border-transparent hover:border-ecogreen-500 text-center shadow-sm hover:shadow-md transition duration-200 group">
+                        <div class="w-12 h-12 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center mx-auto mb-3 group-hover:bg-teal-600 group-hover:text-white transition">
+                            <i class="fa-solid fa-truck-fast text-xl"></i>
+                        </div>
+                        <span class="font-bold text-xs text-slate-800 block">Logistic Team</span>
+                        <span class="text-[10px] text-slate-400 mt-1 block">Transport Courier</span>
+                    </button>
+                    <button onclick="selectRole('TPS3R / Waste Bank')" id="role-btn-tps3r" class="role-selector-card bg-white p-6 rounded-2xl border-2 border-transparent hover:border-ecogreen-500 text-center shadow-sm hover:shadow-md transition duration-200 group">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto mb-3 group-hover:bg-blue-600 group-hover:text-white transition">
+                            <i class="fa-solid fa-industry text-xl"></i>
+                        </div>
+                        <span class="font-bold text-xs text-slate-800 block">TPS3R / Waste Bank</span>
+                        <span class="text-[10px] text-slate-400 mt-1 block">Sorting & Processing Center</span>
+                    </button>
+                    <button onclick="selectRole('Community')" id="role-btn-community" class="role-selector-card bg-white p-6 rounded-2xl border-2 border-transparent hover:border-ecogreen-500 text-center shadow-sm hover:shadow-md transition duration-200 group">
+                        <div class="w-12 h-12 rounded-xl bg-lime-50 text-ecolime flex items-center justify-center mx-auto mb-3 group-hover:bg-ecolime group-hover:text-white transition">
+                            <i class="fa-solid fa-people-group text-xl"></i>
+                        </div>
+                        <span class="font-bold text-xs text-slate-800 block">Community Portal</span>
+                        <span class="text-[10px] text-slate-400 mt-1 block">Circular Processor</span>
+                    </button>
+                </div>
+
+                <div id="login-box-container" class="hidden bg-white p-8 rounded-3xl shadow-xl max-w-md mx-auto border border-slate-100 space-y-6">
+                    <div class="text-center">
+                        <h3 id="selected-role-title" class="font-extrabold text-lg text-ecogreen-600">Login Form</h3>
+                        <p class="text-xs text-slate-400">Enter trial credentials for the competition final account</p>
+                    </div>
+                    <form onsubmit="executeMockAuth(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-slate-700 text-xs font-bold mb-1.5">Email / Username</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i class="fa-solid fa-envelope text-xs"></i></span>
+                                <input type="text" value="admin.coblong@ecoroute.id" class="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-ecolight" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-slate-700 text-xs font-bold mb-1.5">Security Password</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i class="fa-solid fa-lock text-xs"></i></span>
+                                <input type="password" value="••••••••" class="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-ecolight" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full bg-gradient-to-r from-ecogreen-500 to-emerald-600 text-white font-bold py-3 rounded-xl hover:shadow-lg transition">
+                            Enter Role Dashboard
+                        </button>
+                    </form>
+                    <div class="text-center text-xs text-slate-400 border-t border-slate-100 pt-4">
+                        Not yet registered as a regional partner? <a href="#" onclick="alert('Registration is temporarily closed by Admin during the Coblong cluster pilot testing period.')" class="text-blue-500 font-bold hover:underline">Register New Account</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dashboard-display-container" class="hidden space-y-8">
+                <div class="flex justify-between items-center bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <div class="flex items-center space-x-4">
+                        <div id="dash-avatar-icon" class="w-12 h-12 rounded-xl bg-ecogreen-500 text-white flex items-center justify-center text-xl shadow-inner">
+                            <i class="fa-solid fa-user-gear"></i>
+                        </div>
+                        <div>
+                            <h2 id="dash-main-title" class="text-lg font-black text-slate-900">Dashboard Portal</h2>
+                            <p id="dash-sub-title" class="text-xs text-slate-400">Work Area: Coblong Sector 01</p>
+                        </div>
+                    </div>
+                    <button onclick="logoutMock()" class="bg-red-50 hover:bg-red-100 border border-red-200 text-red-600 font-bold text-xs px-4 py-2 rounded-xl transition">
+                        <i class="fa-solid fa-right-from-bracket mr-1"></i> Exit Portal
+                    </button>
+                </div>
+
+                <div id="dash-content-domestic" class="role-dash-view hidden space-y-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4 flex flex-col justify-between">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="text-[10px] text-slate-400 uppercase font-bold block">Active Status</span>
+                                    <h4 class="font-extrabold text-slate-900 text-base">Erick Saputra R.</h4>
+                                </div>
+                                <span class="bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-900 text-[10px] font-black px-3 py-1 rounded-full uppercase shadow-sm"><i class="fa-solid fa-medal"></i> Gold Tier</span>
+                            </div>
+                            
+                            <div class="space-y-1.5">
+                                <div class="flex justify-between text-xs font-semibold text-slate-600">
+                                    <span>Deposit Progress This Month</span>
+                                    <span class="text-ecogreen-600 font-bold">112 / 300 kg</span>
+                                </div>
+                                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden border border-slate-200">
+                                    <div class="bg-gradient-to-r from-ecogreen-500 to-teal-500 h-full rounded-full" style="width: 37%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 flex justify-between items-center">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fa-solid fa-coins text-amber-500 text-lg"></i>
+                                    <span class="text-xs font-bold text-slate-700">Available Circular Points</span>
+                                </div>
+                                <span class="text-base font-black text-slate-900">4,250 <span class="text-[10px] text-slate-400 font-normal">pts</span></span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4 lg:col-span-2">
+                            <h4 class="font-bold text-slate-900 text-sm flex items-center"><i class="fa-solid fa-circle-plus text-ecogreen-500 mr-2"></i> Input New Waste Pickup Schedule</h4>
+                            <form onsubmit="alert('Data successfully uploaded to the server! The pickup route is being automatically scheduled by the system.'); event.preventDefault();" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-600 mb-1">Main Waste Category</label>
+                                    <div class="flex space-x-3">
+                                        <label class="flex-1 border border-slate-200 p-2.5 rounded-xl text-center cursor-pointer hover:bg-slate-50 flex items-center justify-center space-x-2">
+                                            <input type="radio" name="w-cat" checked class="accent-ecogreen-500">
+                                            <span class="text-xs font-bold text-slate-700"><i class="fa-solid fa-apple-whole text-amber-600"></i> Organic</span>
+                                        </label>
+                                        <label class="flex-1 border border-slate-200 p-2.5 rounded-xl text-center cursor-pointer hover:bg-slate-50 flex items-center justify-center space-x-2">
+                                            <input type="radio" name="w-cat" class="accent-ecogreen-500">
+                                            <span class="text-xs font-bold text-slate-700"><i class="fa-solid fa-bottle-water text-blue-500"></i> Inorganic</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-600 mb-1">Estimated Total Weight (kg)</label>
+                                    <input type="number" placeholder="Example: 15" class="w-full border border-slate-200 p-2 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-ecolight" required>
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label class="block text-xs font-bold text-slate-600 mb-1">Additional Notes for Courier</label>
+                                    <input type="text" placeholder="Example: Wet organic kitchen waste has been drained in the green bucket" class="w-full border border-slate-200 p-2 text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-ecolight">
+                                </div>
+                                <div class="sm:col-span-2 flex items-start space-x-2 pt-1">
+                                    <input type="checkbox" required class="mt-0.5 accent-ecogreen-500">
+                                    <span class="text-[11px] text-slate-500 leading-tight">I declare that I have honestly sorted the waste according to the Eco-Route regional technical SOP guide.</span>
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <button type="submit" class="w-full bg-ecogreen-500 hover:bg-ecogreen-600 text-white text-xs font-bold py-2.5 rounded-xl transition">Submit Distribution Request</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-bold text-slate-900 text-sm"><i class="fa-solid fa-spinner text-teal-500 animate-spin mr-2"></i> Track Ongoing Processing Status</h4>
+                            <span class="text-[10px] text-slate-400 font-semibold">Deposit ID: #ECR-99812</span>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 pt-4">
+                            <div class="border-t-4 border-ecogreen-500 pt-2">
+                                <span class="text-xs font-bold text-ecogreen-600 block"><i class="fa-solid fa-circle-check"></i> 1. Pick-up Completed</span>
+                                <span class="text-[10px] text-slate-400 block mt-0.5">Motor Fleet Courier #02 (14:30 WIB)</span>
+                            </div>
+                            <div class="border-t-4 border-ecogreen-500 pt-2">
+                                <span class="text-xs font-bold text-ecogreen-600 block"><i class="fa-solid fa-circle-check"></i> 2. TPS3R Unloading</span>
+                                <span class="text-[10px] text-slate-400 block mt-0.5">Received at Sadang Serang (15:15 WIB)</span>
+                            </div>
+                            <div class="border-t-4 border-teal-500 pt-2 bg-teal-50/40 p-2 rounded-b-xl border-x border-b border-teal-100">
+                                <span class="text-xs font-bold text-teal-600 block"><i class="fa-solid fa-rotate animate-spin"></i> 3. Being Processed</span>
+                                <span class="text-[10px] text-slate-500 block mt-0.5">Stage: BSF Larvae Bioconversion Compost</span>
+                            </div>
+                            <div class="border-t-4 border-slate-200 pt-2">
+                                <span class="text-xs font-bold text-slate-400 block">4. Conversion Completed</span>
+                                <span class="text-[10px] text-slate-400 block mt-0.5">Waiting for points recording conversion</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="dash-content-logistic" class="role-dash-view hidden space-y-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm space-y-4 lg:col-span-1">
+                            <h4 class="font-bold text-slate-900 text-sm flex justify-between items-center">
+                                <span><i class="fa-solid fa-list-check text-teal-500 mr-2"></i> Today's Pickup Manifest</span>
+                                <span class="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded-md">2 Remaining</span>
+                            </h4>
+                            <div class="space-y-3 overflow-y-auto max-h-[350px] pr-1 custom-scrollbar">
+                                <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl space-y-2">
+                                    <div class="flex justify-between items-start">
+                                        <span class="text-xs font-extrabold text-slate-900 block">Point 01: Cafe Kordon Jaya</span>
+                                        <span class="bg-emerald-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">Active</span>
+                                    </div>
+                                    <p class="text-[11px] text-slate-600"><i class="fa-solid fa-location-dot"></i> Jl. Sadang Serang No. 12, Coblong</p>
+                                    <div class="flex justify-between items-center text-[10px] text-slate-500 pt-1 border-t border-emerald-200/60">
+                                        <span>Load: <span class="font-bold text-ecogreen-600">25kg Organic</span></span>
+                                        <button onclick="alert('Status updated: Load transported into logistics fleet.');" class="bg-white hover:bg-emerald-100 text-ecogreen-600 border border-emerald-300 px-2 py-1 rounded font-bold text-[10px]">Pickup</button>
+                                    </div>
+                                </div>
+                                <div class="bg-white border border-slate-200 p-3 rounded-xl space-y-2">
+                                    <div class="flex justify-between items-start">
+                                        <span class="text-xs font-bold text-slate-800 block">Point 02: Perumahan Kavling 4</span>
+                                        <span class="bg-slate-200 text-slate-600 text-[9px] font-bold px-1.5 py-0.5 rounded">Queue</span>
+                                    </div>
+                                    <p class="text-[11px] text-slate-500"><i class="fa-solid fa-location-dot"></i> Gg. Sadang III Barat, Coblong</p>
+                                    <div class="flex justify-between items-center text-[10px] text-slate-400 pt-1 border-t border-slate-100">
+                                        <span>Load: 10kg Inorganic</span>
+                                        <span class="text-[9px] italic">On Route</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm space-y-4 lg:col-span-2 flex flex-col justify-between">
+                            <h4 class="font-bold text-slate-900 text-sm"><i class="fa-solid fa-map-marked-alt text-ecogreen-500 mr-2"></i> Optimized Micro-Route Visual Engine (Integrated Google Maps API)</h4>
+                            
+                            <div class="bg-slate-100 rounded-xl h-64 border border-slate-200 relative overflow-hidden flex items-center justify-center">
+                                <div class="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+                                <svg class="absolute w-full h-full p-4 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M 50 200 Q 150 50 300 120 T 550 80" fill="none" stroke="#2E8B57" stroke-width="5" stroke-dasharray="8" class="animate-[dash_2s_linear_infinite]" />
+                                </svg>
+                                
+                                <div class="absolute left-10 bottom-12 bg-white px-2 py-1 rounded shadow-md border border-slate-300 text-[9px] font-bold text-slate-800 flex items-center"><i class="fa-solid fa-truck text-ecogreen-500 mr-1"></i> Start Fleet</div>
+                                <div class="absolute left-[35%] top-[15%] bg-white px-2 py-1 rounded shadow-md border border-slate-300 text-[9px] font-bold text-slate-800 flex items-center"><i class="fa-solid fa-store text-amber-600 mr-1"></i> Cafe Kordon</div>
+                                <div class="absolute right-12 top-16 bg-white px-2 py-1 rounded shadow-md border border-slate-300 text-[9px] font-bold text-slate-800 flex items-center"><i class="fa-solid fa-industry text-blue-500 mr-1"></i> Finish TPS3R</div>
+                                
+                                <span class="text-xs font-semibold text-slate-400 bg-white/80 px-4 py-2 rounded-full shadow-sm z-10 border border-slate-200">Navigation Map Automatically Directs to Sadang Serang Sector</span>
+                            </div>
+                            
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs text-slate-600 flex justify-between items-center">
+                                <span><i class="fa-solid fa-gas-pump text-amber-500"></i> Calculated Fuel Consumption Efficiency: <span class="font-bold text-ecogreen-600">+22% More Efficient</span></span>
+                                <span class="text-[10px] text-slate-400">System Update: 5 Minutes Ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="dash-content-tps3r" class="role-dash-view hidden space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+                            <h4 class="font-bold text-slate-900 text-sm flex justify-between items-center">
+                                <span><i class="fa-solid fa-weight-hanging text-amber-600 mr-2"></i> Organic Composting Unit Capacity</span>
+                                <span id="lbl-cap-org" class="bg-amber-50 text-amber-700 text-xs font-black px-2.5 py-0.5 rounded-md">150 / 500 kg</span>
+                            </h4>
+                            <p class="text-xs text-slate-500">Slide to change the remaining actual holding limit of the gas shredder machine in the field in real-time</p>
+                            <input type="range" min="0" max="500" value="150" oninput="updateCapLabel('org', this.value, 500)" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500">
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+                            <h4 class="font-bold text-slate-900 text-sm flex justify-between items-center">
+                                <span><i class="fa-solid fa-bug text-emerald-600 mr-2"></i> BSF Bioconversion Unit Capacity</span>
+                                <span id="lbl-cap-bsf" class="bg-emerald-50 text-emerald-700 text-xs font-black px-2.5 py-0.5 rounded-md">320 / 400 kg</span>
+                            </h4>
+                            <p class="text-xs text-slate-500">Slide to control the optimal holding limit of the food waste bio-pond before the courier route is automatically diverted</p>
+                            <input type="range" min="0" max="400" value="320" oninput="updateCapLabel('bsf', this.value, 400)" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+                        <h4 class="font-bold text-slate-900 text-sm"><i class="fa-solid fa-bell text-blue-500 animate-bounce mr-2"></i> Logistics Vehicle Log Heading to Location (Inbound Fleet)</h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse text-xs">
+                                <thead>
+                                    <tr class="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold">
+                                        <th class="p-3">Courier ID</th>
+                                        <th class="p-3">Load Sector</th>
+                                        <th class="p-3">Estimated Tonnage</th>
+                                        <th class="p-3">ETA Arrival</th>
+                                        <th class="p-3 text-right">Gate Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
+                                    <tr>
+                                        <td class="p-3 text-ecogreen-600 font-bold">Fleet-Motor#02</td>
+                                        <td class="p-3">Upper Kordon (Cafes)</td>
+                                        <td class="p-3 font-semibold text-amber-600">32.5 kg Organic</td>
+                                        <td class="p-3 text-blue-600 font-bold">~ 8 Minutes Left</td>
+                                        <td class="p-3 text-right"><button onclick="alert('Digital scale gate opened. Waiting for bluetooth scale synchronization.');" class="bg-blue-50 hover:bg-blue-100 border border-blue-200 text-blue-600 font-bold px-2 py-1 rounded">Open Scale</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 text-ecogreen-600 font-bold">Fleet-Motor#05</td>
+                                        <td class="p-3">Sadang Alley Residential</td>
+                                        <td class="p-3 font-semibold text-blue-500">14.0 kg Inorganic</td>
+                                        <td class="p-3 text-slate-500">~ 24 Minutes Left</td>
+                                        <td class="p-3 text-right"><span class="text-slate-400 italic text-[11px]">On the Way</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="dash-content-community" class="role-dash-view hidden space-y-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm space-y-4 lg:col-span-1">
+                            <h4 class="font-bold text-slate-900 text-sm"><i class="fa-solid fa-hands-holding-child text-emerald-600 mr-2"></i> Raw Material Supply Allocation</h4>
+                            <p class="text-xs text-slate-500">Receive verified clean residue from Sadang Serang TPS3R for the farmer group's processing unit</p>
+                            
+                            <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl space-y-3">
+                                <div class="flex justify-between text-xs">
+                                    <span class="font-bold text-slate-800">Batch #90-A: Shredded Organic Residue</span>
+                                    <span class="text-amber-600 font-bold">45 kg ready</span>
+                                </div>
+                                <p class="text-[11px] text-slate-500">Has passed the 7 HP Shredder machine milling, ready to be put into the communal drum box composter.</p>
+                                <button onclick="alert('Supply successfully claimed. The system recorded the inventory transfer to the Coblong farmer group communal.');" class="w-full bg-gradient-to-r from-emerald-500 to-ecogreen-600 text-white font-bold text-xs py-2 rounded-lg">Claim Raw Material</button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm space-y-4 lg:col-span-2">
+                            <div class="flex justify-between items-center">
+                                <h4 class="font-bold text-slate-900 text-sm"><i class="fa-solid fa-boxes-packing text-ecogreen-500 mr-2"></i> Marketplace Seller Center Catalog Management</h4>
+                                <button onclick="alert('Feature to open the form for adding new circular products.');" class="bg-ecogreen-50 hover:bg-ecogreen-100 text-ecogreen-600 font-bold text-xs px-3 py-1.5 rounded-xl border border-ecogreen-200"><i class="fa-solid fa-plus"></i> Add Product</button>
+                            </div>
+                            
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border-collapse text-xs">
+                                    <thead>
+                                        <tr class="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold">
+                                            <th class="p-3">Processed Product Name</th>
+                                            <th class="p-3">Field Stock</th>
+                                            <th class="p-3">Unit Price</th>
+                                            <th class="p-3">Store Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
+                                        <tr>
+                                            <td class="p-3 font-semibold text-slate-900">Super Premium Compost Fertilizer</td>
+                                            <td class="p-3">120 kg available</td>
+                                            <td class="p-3 text-ecogreen-600 font-bold">Rp 15.000 / kg</td>
+                                            <td class="p-3"><span class="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.5 rounded font-bold">Visible in Shop</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-semibold text-slate-900">High Protein Dried BSF Maggots</td>
+                                            <td class="p-3">40 packs available</td>
+                                            <td class="p-3 text-ecogreen-600 font-bold">Rp 35.000 / pack</td>
+                                            <td class="p-3"><span class="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.5 rounded font-bold">Visible in Shop</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-xs py-8 border-t border-slate-800 mt-20">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-3">
+            <p class="font-bold text-slate-300">ECO-ROUTE Platform &copy; 2026 Integrated Hyperlocal Circular Supply Chain Signal</p>
+            <p class="text-slate-500">Developed specifically for the Finals of the Project Management Challenge (PMC) 2026 - Bandung Waste Solution Ecosystem</p>
+            <div class="flex justify-center space-x-6 text-slate-400 pt-2 text-lg">
+                <a href="#" class="hover:text-emerald-400 transition"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-emerald-400 transition"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="#" class="hover:text-emerald-400 transition"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
+
+
+    <div id="product-modal-overlay" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-100 custom-scrollbar flex flex-col md:flex-row">
+            <div class="md:w-5/12 bg-slate-50 relative h-48 md:h-auto">
+                <img id="modal-img" src="" alt="Product" class="w-full h-full object-cover">
+            </div>
+            <div class="md:w-7/12 p-6 space-y-5 relative flex flex-col justify-between">
+                <button onclick="closeProductModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                
+                <div class="space-y-3">
+                    <div>
+                        <span id="modal-seller" class="text-[10px] font-bold text-ecogreen-600 bg-emerald-50 border border-emerald-100 px-2.5 py-0.5 rounded-md uppercase tracking-wider">Seller Profile</span>
+                        <h3 id="modal-title" class="font-black text-slate-900 text-xl tracking-tight mt-1">Product Name</h3>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        <span class="text-[10px] text-slate-400 block">Commodity Price</span>
+                        <span id="modal-price" class="text-2xl font-black text-ecogreen-600">Rp 00.000</span>
+                    </div>
+                    <div class="space-y-1">
+                        <span class="text-xs font-bold text-slate-700 block">Regional User Reviews (<i class="fa-solid fa-star text-amber-500"></i> 4.9/5)</span>
+                        <p id="modal-desc" class="text-slate-600 text-xs leading-relaxed">Full description explanation of the Eco-Route circular commodity...</p>
+                    </div>
+                </div>
+
+                <div id="checkout-form-area" class="hidden border-t border-slate-100 pt-4 space-y-3">
+                    <h4 class="font-bold text-xs text-slate-900 uppercase tracking-wider"><i class="fa-solid fa-truck-fast text-teal-500"></i> Delivery Form</h4>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="col-span-2">
+                            <input type="text" id="chk-loc" placeholder="Enter Detailed Delivery Address (Coblong District)" class="w-full text-xs border border-slate-200 p-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-ecolight" required>
+                        </div>
+                        <div>
+                            <select onchange="updatePostageSim(this.value)" class="w-full text-xs border border-slate-200 p-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-ecolight">
+                                <option value="0">Select Courier Method</option>
+                                <option value="5000">Eco-Route Micro-Fleet (Same Day)</option>
+                                <option value="8000">Third Party Logistics (Instant)</option>
+                            </select>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-100 px-2.5 py-2 rounded-xl flex justify-between items-center text-xs">
+                            <span class="text-slate-400">Micro Postage:</span>
+                            <span id="chk-postage-lbl" class="font-bold text-slate-800">Rp 0</span>
+                        </div>
+                    </div>
+                    <div class="bg-emerald-900 text-white p-3 rounded-xl flex justify-between items-center">
+                        <div>
+                            <span class="text-[10px] text-emerald-300 block">Total Financial Bill</span>
+                            <span id="chk-grandtotal-lbl" class="text-base font-black text-yellow-300">Rp 0</span>
+                        </div>
+                        <button onclick="executeFinalCheckoutTrx()" class="bg-yellow-400 hover:bg-yellow-500 text-slate-950 font-black text-xs px-4 py-2.5 rounded-lg shadow-md transition">
+                            Pay Now
+                        </button>
+                    </div>
+                </div>
+
+                <div id="modal-base-btn-area" class="pt-3 border-t border-slate-100 flex gap-2">
+                    <button onclick="initiateCheckoutFlow()" class="w-full bg-gradient-to-r from-ecogreen-500 to-emerald-600 text-white font-bold text-xs py-3 rounded-xl hover:shadow-lg transition">
+                        Continue Commodity Order
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Core Section Router Engine
+        function switchSection(targetId) {
+            // Hide all views
+            const divs = document.querySelectorAll('.section-target');
+            divs.forEach(div => div.classList.add('hidden'));
+            divs.forEach(div => div.classList.remove('block'));
+
+            // Show target
+            const activeSec = document.getElementById(`sec-${targetId}`);
+            activeSec.classList.remove('hidden');
+            activeSec.classList.add('block');
+
+            // Reset navigation tab highlighters styles
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('text-yellow-300', 'bg-emerald-800/50');
+                link.classList.add('text-emerald-50', 'hover:bg-emerald-600/30');
+            });
+
+            // Highlight target nav link
+            const currentLink = document.getElementById(`nav-targetId`);
+            const targetLink = document.getElementById(`nav-${targetId}`);
+            if (targetLink) {
+                targetLink.classList.remove('text-emerald-50', 'hover:bg-emerald-600/30');
+                targetLink.classList.add('text-yellow-300', 'bg-emerald-800/50');
+            }
+        }
+
+        // Marketplace Category Filter Logic
+        function filterShop(category) {
+            const cards = document.querySelectorAll('.prod-card');
+            
+            // UI Button Highlighters Toggler
+            const tabs = ['all', 'organic', 'inorganic'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                btn.classList.remove('bg-white', 'text-ecogreen-600', 'shadow-sm');
+                btn.classList.add('text-slate-600', 'hover:bg-slate-200/60');
+            });
+            const activeTab = document.getElementById(`tab-${category}`);
+            activeTab.classList.remove('text-slate-600', 'hover:bg-slate-200/60');
+            activeTab.classList.add('bg-white', 'text-ecogreen-600', 'shadow-sm');
+
+            // Cards visibility toggler
+            cards.forEach(card => {
+                if (category === 'all') {
+                    card.classList.remove('hidden');
+                } else {
+                    if (card.classList.contains(`item-${category}`)) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                }
+            });
+        }
+
+        // Account Dynamic Authentication Handler Router
+        let currentSelectedRole = '';
+        function selectRole(roleName) {
+            currentSelectedRole = roleName;
+            
+            // Show credential login form box
+            const loginBox = document.getElementById('login-box-container');
+            loginBox.classList.remove('hidden');
+
+            // Update sub title title element text
+            document.getElementById('selected-role-title').innerText = `Portal Access: ${roleName}`;
+
+            // Highlight chosen visual block border indicators
+            const buttons = document.querySelectorAll('.role-selector-card');
+            buttons.forEach(b => b.classList.remove('border-ecogreen-500', 'bg-green-50/40'));
+            
+            let targetBtnId = '';
+            if (roleName.includes('Domestic')) targetBtnId = 'role-btn-domestic';
+            if (roleName.includes('Logistic')) targetBtnId = 'role-btn-logistic';
+            if (roleName.includes('TPS3R')) targetBtnId = 'role-btn-tps3r';
+            if (roleName.includes('Community')) targetBtnId = 'role-btn-community';
+            
+            document.getElementById(targetBtnId).classList.add('border-ecogreen-500', 'bg-green-50/40');
+        }
+
+        // Auth Submission Simulator
+        function executeMockAuth(event) {
+            event.preventDefault();
+            
+            // Hide selection interface block panel
+            document.getElementById('auth-panel').classList.remove('block');
+            document.getElementById('auth-panel').classList.add('hidden');
+
+            // Display logged dashboard master container frame
+            document.getElementById('dashboard-display-container').classList.remove('hidden');
+
+            // Update system header labels texts
+            document.getElementById('dash-main-title').innerText = `Main Portal: ${currentSelectedRole}`;
+            
+            // Switch session badge navbar text state
+            document.getElementById('session-text').innerText = `Logged in: ${currentSelectedRole} (Sector 01)`;
+            document.getElementById('session-badge').classList.replace('bg-emerald-800/60', 'bg-yellow-400/20');
+            document.getElementById('session-badge').classList.add('border-yellow-400');
+
+            // Dynamic icons loader
+            let iconCode = '<i class="fa-solid fa-user-gear"></i>';
+            if (currentSelectedRole.includes('Domestic')) iconCode = '<i class="fa-solid fa-house-user"></i>';
+            if (currentSelectedRole.includes('Logistic')) iconCode = '<i class="fa-solid fa-truck-fast"></i>';
+            if (currentSelectedRole.includes('TPS3R')) iconCode = '<i class="fa-solid fa-industry"></i>';
+            if (currentSelectedRole.includes('Community')) iconCode = '<i class="fa-solid fa-people-group"></i>';
+            document.getElementById('dash-avatar-icon').innerHTML = iconCode;
+
+            // Display respective dashboard blocks content sheets
+            const dashViews = document.querySelectorAll('.role-dash-view');
+            dashViews.forEach(v => v.classList.add('hidden'));
+
+            if (currentSelectedRole.includes('Domestic')) document.getElementById('dash-content-domestic').classList.remove('hidden');
+            if (currentSelectedRole.includes('Logistic')) document.getElementById('dash-content-logistic').classList.remove('hidden');
+            if (currentSelectedRole.includes('TPS3R')) document.getElementById('dash-content-tps3r').classList.remove('hidden');
+            if (currentSelectedRole.includes('Community')) document.getElementById('dash-content-community').classList.remove('hidden');
+        }
+
+        // Logout Mock Action Trigger
+        function logoutMock() {
+            // Restore default templates views states toggles
+            document.getElementById('dashboard-display-container').classList.add('hidden');
+            document.getElementById('auth-panel').classList.remove('hidden');
+            document.getElementById('auth-panel').classList.add('block');
+            document.getElementById('login-box-container').classList.add('hidden');
+
+            const buttons = document.querySelectorAll('.role-selector-card');
+            buttons.forEach(b => b.classList.remove('border-ecogreen-500', 'bg-green-50/40'));
+
+            // Navbar reset status
+            document.getElementById('session-text').innerText = 'Guest Mode (Not Logged In)';
+            document.getElementById('session-badge').classList.replace('bg-yellow-400/20', 'bg-emerald-800/60');
+            document.getElementById('session-badge').classList.remove('border-yellow-400');
+        }
+
+        // Live Sliders Live Numerical Converters 
+        function updateCapLabel(type, val, max) {
+            document.getElementById(`lbl-cap-${type}`).innerText = `${val} / ${max} kg`;
+        }
+
+        // Modal Sheet Controller Engine Functions
+        let rawPriceInt = 0;
+        function openProductModal(title, price, seller, desc, imgUrl) {
+            document.getElementById('product-modal-overlay').classList.remove('hidden');
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-price').innerText = price;
+            document.getElementById('modal-seller').innerText = `By: ${seller}`;
+            document.getElementById('modal-desc').innerText = desc;
+            document.getElementById('modal-img').src = imgUrl;
+
+            // Extract pricing numbers integers for calculations formula conversions
+            rawPriceInt = parseInt(price.replace(/[^0-9]/g, ''));
+            
+            // Clean dynamic structures back to basic initial state
+            document.getElementById('checkout-form-area').classList.add('hidden');
+            document.getElementById('modal-base-btn-area').classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal-overlay').classList.add('hidden');
+        }
+
+        function initiateCheckoutFlow() {
+            document.getElementById('checkout-form-area').classList.remove('hidden');
+            document.getElementById('modal-base-btn-area').classList.add('hidden');
+            
+            // Init default bill sum
+            document.getElementById('chk-grandtotal-lbl').innerText = `Rp ${rawPriceInt.toLocaleString('id-ID')}`;
+        }
+
+        function updatePostageSim(postageVal) {
+            const cost = parseInt(postageVal) || 0;
+            document.getElementById('chk-postage-lbl').innerText = `Rp ${cost.toLocaleString('id-ID')}`;
+            
+            const finalBill = rawPriceInt + cost;
+            document.getElementById('chk-grandtotal-lbl').innerText = `Rp ${finalBill.toLocaleString('id-ID')}`;
+        }
+
+        function executeFinalCheckoutTrx() {
+            const locInput = document.getElementById('chk-loc').value.trim();
+            if(!locInput) {
+                alert('Please enter the detailed delivery address for the Coblong cluster first!');
+                return;
+            }
+            alert('Verified Payment Successful! Your circular order has been automatically forwarded to the respective community processor group.');
+            closeProductModal();
+        }
+    </script>
+</body>
+</html>
