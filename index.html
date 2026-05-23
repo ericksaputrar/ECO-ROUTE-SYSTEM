@@ -37,6 +37,12 @@
         .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #8FBC8F; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #2E8B57; }
+        /* Animasi garis untuk rute peta */
+        @keyframes dash {
+            to {
+                stroke-dashoffset: -24;
+            }
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased custom-scrollbar">
@@ -81,6 +87,7 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
+        <!-- [SECTION: HOME] -->
         <section id="sec-home" class="section-target block space-y-16">
             <div class="flex flex-col lg:flex-row items-center gap-12 bg-white rounded-3xl p-8 lg:p-12 shadow-xl border border-slate-100 relative overflow-hidden">
                 <div class="absolute -right-16 -top-16 w-64 h-64 bg-emerald-50 rounded-full blur-3xl pointer-events-none"></div>
@@ -162,7 +169,7 @@
             </div>
         </section>
 
-
+        <!-- [SECTION: ABOUT] -->
         <section id="sec-about" class="section-target hidden space-y-12">
             <div class="bg-white rounded-3xl p-8 lg:p-10 shadow-md border border-slate-100 space-y-6">
                 <div class="border-l-4 border-ecogreen-500 pl-4">
@@ -222,7 +229,7 @@
             </div>
         </section>
 
-
+        <!-- [SECTION: SHOP] (Gamber Asli Dipertahankan) -->
         <section id="sec-shop" class="section-target hidden space-y-8">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
                 <div>
@@ -238,6 +245,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product 1 -->
                 <div class="prod-card item-organic bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col">
                     <div class="relative h-48 bg-slate-100">
                         <img src="compost.jpg" alt="Super Premium Compost Fertilizer" class="w-full h-full object-cover">
@@ -262,6 +270,7 @@
                     </div>
                 </div>
 
+                <!-- Product 2 -->
                 <div class="prod-card item-organic bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col">
                     <div class="relative h-48 bg-slate-100">
                         <img src="magot.jpg" alt="High Protein Dried BSF Maggots" class="w-full h-full object-cover">
@@ -286,6 +295,7 @@
                     </div>
                 </div>
 
+                <!-- Product 3 -->
                 <div class="prod-card item-inorganic bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col">
                     <div class="relative h-48 bg-slate-100">
                         <img src="bags.jpg" alt="Upcycled Handmade Tote Bag" class="w-full h-full object-cover">
@@ -303,7 +313,7 @@
                                 <span class="text-[10px] text-slate-400 block">Price / pcs</span>
                                 <span class="text-lg font-black text-ecogreen-600">Rp 45.000</span>
                             </div>
-                            <button onclick="openProductModal('Upcycled Handmade Tote Bag', 'Rp 45.000', 'Coblong Upcycle Creative', 'Versatile eco-friendly bag produced by fostered independent tailors\' upcycling industry. Through strict sterilization stages, precise pattern cutting, and double stitching with inner canvas lining for durable daily use.', 'bags.png')" class="bg-gradient-to-r from-ecogreen-500 to-emerald-600 text-white font-bold text-xs px-4 py-2.5 rounded-lg hover:shadow-md transition">
+                            <button onclick="openProductModal('Upcycled Handmade Tote Bag', 'Rp 45.000', 'Coblong Upcycle Creative', 'Versatile eco-friendly bag produced by fostered independent tailors\' upcycling industry. Through strict sterilization stages, precise pattern cutting, and double stitching with inner canvas lining for durable daily use.', 'bags.jpg')" class="bg-gradient-to-r from-ecogreen-500 to-emerald-600 text-white font-bold text-xs px-4 py-2.5 rounded-lg hover:shadow-md transition">
                                 View Details
                             </button>
                         </div>
@@ -313,6 +323,7 @@
         </section>
 
 
+        <!-- [SECTION: ACCOUNT / DASHBOARDS] -->
         <section id="sec-account" class="section-target hidden space-y-12">
             
             <div id="auth-panel" class="space-y-8 block">
@@ -398,6 +409,7 @@
                     </button>
                 </div>
 
+                <!-- DOMESTIC DASHBOARD -->
                 <div id="dash-content-domestic" class="role-dash-view hidden space-y-8">
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4 flex flex-col justify-between">
@@ -488,8 +500,20 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- REPORT GENERATOR BUTTON DOMESTIC -->
+                    <div class="bg-gradient-to-r from-slate-800 to-slate-900 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between shadow-lg border border-slate-700 mt-6">
+                        <div>
+                            <h4 class="text-white font-bold flex items-center"><i class="fa-solid fa-file-invoice text-yellow-400 mr-2"></i> System Analytics Report</h4>
+                            <p class="text-slate-400 text-xs mt-1">Generate your personal waste footprint & points statement.</p>
+                        </div>
+                        <button onclick="generateReport('Domestic')" class="mt-4 sm:mt-0 bg-ecogreen-500 hover:bg-ecogreen-600 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition flex items-center shadow-md">
+                            <i class="fa-solid fa-download mr-2"></i> Generate Report
+                        </button>
+                    </div>
                 </div>
 
+                <!-- LOGISTIC DASHBOARD (NEW MAP & AI FEATURE) -->
                 <div id="dash-content-logistic" class="role-dash-view hidden space-y-6">
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm space-y-4 lg:col-span-1">
@@ -497,7 +521,7 @@
                                 <span><i class="fa-solid fa-list-check text-teal-500 mr-2"></i> Today's Pickup Manifest</span>
                                 <span class="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded-md">2 Remaining</span>
                             </h4>
-                            <div class="space-y-3 overflow-y-auto max-h-[350px] pr-1 custom-scrollbar">
+                            <div class="space-y-3 overflow-y-auto max-h-[450px] pr-1 custom-scrollbar">
                                 <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-xl space-y-2">
                                     <div class="flex justify-between items-start">
                                         <span class="text-xs font-extrabold text-slate-900 block">Point 01: Cafe Kordon Jaya</span>
@@ -523,27 +547,89 @@
                             </div>
                         </div>
 
-                        <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm space-y-4 lg:col-span-2 flex flex-col justify-between">
-                            <h4 class="font-bold text-slate-900 text-sm"><i class="fa-solid fa-map-marked-alt text-ecogreen-500 mr-2"></i> Optimized Micro-Route Visual Engine (Integrated Google Maps API)</h4>
+                        <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm space-y-4 lg:col-span-2 flex flex-col justify-between relative">
+                            <div class="flex justify-between items-center">
+                                <h4 class="font-bold text-slate-900 text-sm"><i class="fa-solid fa-map-marked-alt text-ecogreen-500 mr-2"></i> Real-Time Micro-Route (Live G-Maps API)</h4>
+                                <span class="bg-blue-50 border border-blue-200 text-blue-600 text-[10px] font-bold px-2 py-1 rounded-lg flex items-center"><span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse mr-1.5"></span> GPS Active</span>
+                            </div>
                             
-                            <div class="bg-slate-100 rounded-xl h-64 border border-slate-200 relative overflow-hidden flex items-center justify-center">
-                                <div class="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-                                <svg class="absolute w-full h-full p-4 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M 50 200 Q 150 50 300 120 T 550 80" fill="none" stroke="#2E8B57" stroke-width="5" stroke-dasharray="8" class="animate-[dash_2s_linear_infinite]" />
+                            <!-- PETA GOOGLE MAPS ASLI DENGAN IFRAME -->
+                            <div class="bg-slate-200 rounded-xl h-80 border border-slate-300 relative overflow-hidden flex items-center justify-center shadow-inner group">
+                                
+                                <!-- Google Maps Iframe (Area Sadang Serang, Bandung) -->
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15843.83416043144!2d107.60835015!3d-6.8950854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e65a58d601b3%3A0x6d8bd6c43c22b112!2sSadang%20Serang%2C%20Coblong%2C%20Bandung%20City%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid" class="absolute inset-0 w-full h-full opacity-70" style="border:0; filter: grayscale(10%) contrast(110%);" allowfullscreen="" loading="lazy"></iframe>
+
+                                <!-- Overlay Rute (Animasi Garis) di atas Google Maps -->
+                                <svg class="absolute w-full h-full p-4 pointer-events-none z-10 drop-shadow-md" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M 80 220 Q 200 80 350 140 T 600 90" fill="none" stroke="#14b8a6" stroke-width="6" stroke-linecap="round" class="opacity-30" />
+                                    <path d="M 80 220 Q 200 80 350 140 T 600 90" fill="none" stroke="#2E8B57" stroke-width="6" stroke-linecap="round" stroke-dasharray="12 12" class="animate-[dash_1s_linear_infinite]" />
                                 </svg>
                                 
-                                <div class="absolute left-10 bottom-12 bg-white px-2 py-1 rounded shadow-md border border-slate-300 text-[9px] font-bold text-slate-800 flex items-center"><i class="fa-solid fa-truck text-ecogreen-500 mr-1"></i> Start Fleet</div>
-                                <div class="absolute left-[35%] top-[15%] bg-white px-2 py-1 rounded shadow-md border border-slate-300 text-[9px] font-bold text-slate-800 flex items-center"><i class="fa-solid fa-store text-amber-600 mr-1"></i> Cafe Kordon</div>
-                                <div class="absolute right-12 top-16 bg-white px-2 py-1 rounded shadow-md border border-slate-300 text-[9px] font-bold text-slate-800 flex items-center"><i class="fa-solid fa-industry text-blue-500 mr-1"></i> Finish TPS3R</div>
+                                <!-- Pin Lokasi / UI Map Floatings -->
+                                <div class="absolute left-[10%] bottom-[20%] bg-white p-1.5 rounded-full shadow-lg border-2 border-ecogreen-500 z-20 flex items-center justify-center animate-bounce">
+                                    <i class="fa-solid fa-truck text-ecogreen-500 text-xs"></i>
+                                </div>
+                                <div class="absolute left-[45%] top-[35%] bg-white px-2 py-1 rounded shadow-md border border-slate-300 text-[10px] font-bold text-slate-800 flex items-center z-20"><i class="fa-solid fa-store text-amber-600 mr-1"></i> Cafe Kordon</div>
                                 
-                                <span class="text-xs font-semibold text-slate-400 bg-white/80 px-4 py-2 rounded-full shadow-sm z-10 border border-slate-200">Navigation Map Automatically Directs to Sadang Serang Sector</span>
+                                <!-- TPS3R ENHANCED MAP PIN TOOLTIP -->
+                                <div class="absolute right-[5%] top-[15%] bg-white/95 backdrop-blur-sm p-3 rounded-xl shadow-2xl border border-blue-200 flex flex-col gap-1 w-48 z-30 group-hover:scale-105 transition-transform cursor-pointer">
+                                    <div class="flex items-center justify-between border-b border-slate-100 pb-1.5 mb-1">
+                                        <span class="text-[11px] font-bold text-slate-800 flex items-center"><i class="fa-solid fa-industry text-blue-500 mr-1.5"></i> Finish TPS3R</span>
+                                        <span class="relative flex h-2.5 w-2.5">
+                                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                                        </span>
+                                    </div>
+                                    <div class="space-y-1.5 mt-1">
+                                        <div class="flex justify-between text-[10px]">
+                                            <span class="text-slate-500 font-medium">Current Load</span>
+                                            <span class="font-bold text-amber-600">320 kg</span>
+                                        </div>
+                                        <div class="flex justify-between text-[10px]">
+                                            <span class="text-slate-500 font-medium">Max Capacity</span>
+                                            <span class="font-bold text-slate-800">400 kg</span>
+                                        </div>
+                                        <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden mt-1">
+                                            <div class="bg-gradient-to-r from-amber-400 to-amber-500 h-full rounded-full" style="width: 80%"></div>
+                                        </div>
+                                        <p class="text-[9px] text-slate-400 text-center font-semibold mt-1">80% Capacity Reached</p>
+                                    </div>
+                                </div>
                             </div>
                             
-                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs text-slate-600 flex justify-between items-center">
-                                <span><i class="fa-solid fa-gas-pump text-amber-500"></i> Calculated Fuel Consumption Efficiency: <span class="font-bold text-ecogreen-600">+22% More Efficient</span></span>
-                                <span class="text-[10px] text-slate-400">System Update: 5 Minutes Ago</span>
+                            <!-- NEW FEATURE: AI TELEMETRY SENSORS -->
+                            <div class="grid grid-cols-2 gap-4 mt-2">
+                                <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 flex flex-col justify-center">
+                                    <span class="text-[10px] text-slate-400 font-bold uppercase block mb-1">Local Condition Sensor</span>
+                                    <div class="flex items-center space-x-3">
+                                        <i class="fa-solid fa-cloud-sun text-amber-500 text-2xl"></i>
+                                        <div>
+                                            <span class="text-xs font-bold text-slate-800 block">Clear (31°C)</span>
+                                            <span class="text-[10px] text-slate-500">Traffic: Low Congestion</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-200 flex flex-col justify-center">
+                                    <span class="text-[10px] text-emerald-600 font-bold uppercase block mb-1">AI Routing Engine</span>
+                                    <div class="flex items-start space-x-2">
+                                        <i class="fa-solid fa-microchip text-emerald-600 mt-0.5 text-lg"></i>
+                                        <p class="text-[10px] text-slate-700 leading-tight"><strong>Auto-Reroute Active:</strong> Avoiding 5-min delay at Simpang Dago. Saving <span class="font-bold text-ecogreen-600">0.4 Liters</span> of fuel.</p>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
+                    </div>
+
+                    <!-- REPORT GENERATOR BUTTON LOGISTIC -->
+                    <div class="bg-gradient-to-r from-slate-800 to-slate-900 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between shadow-lg border border-slate-700 mt-6">
+                        <div>
+                            <h4 class="text-white font-bold flex items-center"><i class="fa-solid fa-file-invoice text-yellow-400 mr-2"></i> Logistics Fleet Report</h4>
+                            <p class="text-slate-400 text-xs mt-1">Download monthly routing efficiency and fuel consumption stats.</p>
+                        </div>
+                        <button onclick="generateReport('Logistic')" class="mt-4 sm:mt-0 bg-teal-500 hover:bg-teal-600 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition flex items-center shadow-md">
+                            <i class="fa-solid fa-download mr-2"></i> Generate Report
+                        </button>
                     </div>
                 </div>
 
@@ -599,6 +685,17 @@
                             </table>
                         </div>
                     </div>
+
+                    <!-- REPORT GENERATOR BUTTON TPS3R -->
+                    <div class="bg-gradient-to-r from-slate-800 to-slate-900 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between shadow-lg border border-slate-700 mt-6">
+                        <div>
+                            <h4 class="text-white font-bold flex items-center"><i class="fa-solid fa-file-invoice text-yellow-400 mr-2"></i> Facility Operations Report</h4>
+                            <p class="text-slate-400 text-xs mt-1">Export machine uptime, total tonnage processed, and conversion rates.</p>
+                        </div>
+                        <button onclick="generateReport('TPS3R')" class="mt-4 sm:mt-0 bg-blue-500 hover:bg-blue-600 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition flex items-center shadow-md">
+                            <i class="fa-solid fa-download mr-2"></i> Generate Report
+                        </button>
+                    </div>
                 </div>
 
                 <div id="dash-content-community" class="role-dash-view hidden space-y-6">
@@ -651,6 +748,17 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- REPORT GENERATOR BUTTON COMMUNITY -->
+                    <div class="bg-gradient-to-r from-slate-800 to-slate-900 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between shadow-lg border border-slate-700 mt-6">
+                        <div>
+                            <h4 class="text-white font-bold flex items-center"><i class="fa-solid fa-file-invoice text-yellow-400 mr-2"></i> Community Circular Report</h4>
+                            <p class="text-slate-400 text-xs mt-1">Review upcycling financials, marketplace sales, and material claims.</p>
+                        </div>
+                        <button onclick="generateReport('Community')" class="mt-4 sm:mt-0 bg-lime-600 hover:bg-lime-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition flex items-center shadow-md">
+                            <i class="fa-solid fa-download mr-2"></i> Generate Report
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -668,7 +776,7 @@
         </div>
     </footer>
 
-
+    <!-- PRODUCT MODAL OVERLAY (ORIGINAL) -->
     <div id="product-modal-overlay" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-100 custom-scrollbar flex flex-col md:flex-row">
             <div class="md:w-5/12 bg-slate-50 relative h-48 md:h-auto">
@@ -732,29 +840,50 @@
         </div>
     </div>
 
+    <!-- REPORT MODAL OVERLAY -->
+    <div id="report-modal-overlay" class="hidden fixed inset-0 z-[60] bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity">
+        <div class="bg-white rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-200 custom-scrollbar flex flex-col relative animate-[fadeIn_0.3s_ease-out]">
+            <div class="bg-slate-900 p-6 rounded-t-2xl flex justify-between items-center sticky top-0 z-10">
+                <div>
+                    <h2 class="text-xl font-black text-white flex items-center"><i class="fa-solid fa-chart-line text-yellow-400 mr-3"></i> Monthly Analytics Report</h2>
+                    <p id="report-modal-subtitle" class="text-xs text-slate-400 mt-1 uppercase tracking-widest">Portal: [ROLE]</p>
+                </div>
+                <button onclick="closeReportModal()" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-red-500 text-slate-300 hover:text-white flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="report-modal-content" class="p-6 md:p-8 bg-slate-50 space-y-6">
+                <!-- Data Laporan Dimuat JS -->
+            </div>
+            <div class="p-6 border-t border-slate-200 bg-white flex justify-between items-center rounded-b-2xl">
+                <span class="text-[10px] text-slate-400">Generated automatically by ECO-ROUTE Engine</span>
+                <button onclick="alert('Downloading PDF to your device...');" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-5 py-2.5 rounded-lg flex items-center shadow-md transition">
+                    <i class="fa-solid fa-file-pdf text-red-400 mr-2"></i> Save as PDF
+                </button>
+            </div>
+        </div>
+    </div>
+
 
     <script>
         // Core Section Router Engine
         function switchSection(targetId) {
-            // Hide all views
             const divs = document.querySelectorAll('.section-target');
             divs.forEach(div => div.classList.add('hidden'));
             divs.forEach(div => div.classList.remove('block'));
 
-            // Show target
             const activeSec = document.getElementById(`sec-${targetId}`);
-            activeSec.classList.remove('hidden');
-            activeSec.classList.add('block');
+            if (activeSec) {
+                activeSec.classList.remove('hidden');
+                activeSec.classList.add('block');
+            }
 
-            // Reset navigation tab highlighters styles
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => {
                 link.classList.remove('text-yellow-300', 'bg-emerald-800/50');
                 link.classList.add('text-emerald-50', 'hover:bg-emerald-600/30');
             });
 
-            // Highlight target nav link
-            const currentLink = document.getElementById(`nav-targetId`);
             const targetLink = document.getElementById(`nav-${targetId}`);
             if (targetLink) {
                 targetLink.classList.remove('text-emerald-50', 'hover:bg-emerald-600/30');
@@ -766,18 +895,20 @@
         function filterShop(category) {
             const cards = document.querySelectorAll('.prod-card');
             
-            // UI Button Highlighters Toggler
             const tabs = ['all', 'organic', 'inorganic'];
             tabs.forEach(t => {
                 const btn = document.getElementById(`tab-${t}`);
-                btn.classList.remove('bg-white', 'text-ecogreen-600', 'shadow-sm');
-                btn.classList.add('text-slate-600', 'hover:bg-slate-200/60');
+                if(btn){
+                    btn.classList.remove('bg-white', 'text-ecogreen-600', 'shadow-sm');
+                    btn.classList.add('text-slate-600', 'hover:bg-slate-200/60');
+                }
             });
             const activeTab = document.getElementById(`tab-${category}`);
-            activeTab.classList.remove('text-slate-600', 'hover:bg-slate-200/60');
-            activeTab.classList.add('bg-white', 'text-ecogreen-600', 'shadow-sm');
+            if(activeTab){
+                activeTab.classList.remove('text-slate-600', 'hover:bg-slate-200/60');
+                activeTab.classList.add('bg-white', 'text-ecogreen-600', 'shadow-sm');
+            }
 
-            // Cards visibility toggler
             cards.forEach(card => {
                 if (category === 'all') {
                     card.classList.remove('hidden');
@@ -796,14 +927,11 @@
         function selectRole(roleName) {
             currentSelectedRole = roleName;
             
-            // Show credential login form box
             const loginBox = document.getElementById('login-box-container');
             loginBox.classList.remove('hidden');
 
-            // Update sub title title element text
             document.getElementById('selected-role-title').innerText = `Portal Access: ${roleName}`;
 
-            // Highlight chosen visual block border indicators
             const buttons = document.querySelectorAll('.role-selector-card');
             buttons.forEach(b => b.classList.remove('border-ecogreen-500', 'bg-green-50/40'));
             
@@ -813,29 +941,25 @@
             if (roleName.includes('TPS3R')) targetBtnId = 'role-btn-tps3r';
             if (roleName.includes('Community')) targetBtnId = 'role-btn-community';
             
-            document.getElementById(targetBtnId).classList.add('border-ecogreen-500', 'bg-green-50/40');
+            const tgtBtn = document.getElementById(targetBtnId);
+            if(tgtBtn) tgtBtn.classList.add('border-ecogreen-500', 'bg-green-50/40');
         }
 
         // Auth Submission Simulator
         function executeMockAuth(event) {
             event.preventDefault();
             
-            // Hide selection interface block panel
             document.getElementById('auth-panel').classList.remove('block');
             document.getElementById('auth-panel').classList.add('hidden');
 
-            // Display logged dashboard master container frame
             document.getElementById('dashboard-display-container').classList.remove('hidden');
 
-            // Update system header labels texts
             document.getElementById('dash-main-title').innerText = `Main Portal: ${currentSelectedRole}`;
             
-            // Switch session badge navbar text state
             document.getElementById('session-text').innerText = `Logged in: ${currentSelectedRole} (Sector 01)`;
             document.getElementById('session-badge').classList.replace('bg-emerald-800/60', 'bg-yellow-400/20');
             document.getElementById('session-badge').classList.add('border-yellow-400');
 
-            // Dynamic icons loader
             let iconCode = '<i class="fa-solid fa-user-gear"></i>';
             if (currentSelectedRole.includes('Domestic')) iconCode = '<i class="fa-solid fa-house-user"></i>';
             if (currentSelectedRole.includes('Logistic')) iconCode = '<i class="fa-solid fa-truck-fast"></i>';
@@ -843,7 +967,6 @@
             if (currentSelectedRole.includes('Community')) iconCode = '<i class="fa-solid fa-people-group"></i>';
             document.getElementById('dash-avatar-icon').innerHTML = iconCode;
 
-            // Display respective dashboard blocks content sheets
             const dashViews = document.querySelectorAll('.role-dash-view');
             dashViews.forEach(v => v.classList.add('hidden'));
 
@@ -855,7 +978,6 @@
 
         // Logout Mock Action Trigger
         function logoutMock() {
-            // Restore default templates views states toggles
             document.getElementById('dashboard-display-container').classList.add('hidden');
             document.getElementById('auth-panel').classList.remove('hidden');
             document.getElementById('auth-panel').classList.add('block');
@@ -864,7 +986,6 @@
             const buttons = document.querySelectorAll('.role-selector-card');
             buttons.forEach(b => b.classList.remove('border-ecogreen-500', 'bg-green-50/40'));
 
-            // Navbar reset status
             document.getElementById('session-text').innerText = 'Guest Mode (Not Logged In)';
             document.getElementById('session-badge').classList.replace('bg-yellow-400/20', 'bg-emerald-800/60');
             document.getElementById('session-badge').classList.remove('border-yellow-400');
@@ -885,10 +1006,8 @@
             document.getElementById('modal-desc').innerText = desc;
             document.getElementById('modal-img').src = imgUrl;
 
-            // Extract pricing numbers integers for calculations formula conversions
             rawPriceInt = parseInt(price.replace(/[^0-9]/g, ''));
             
-            // Clean dynamic structures back to basic initial state
             document.getElementById('checkout-form-area').classList.add('hidden');
             document.getElementById('modal-base-btn-area').classList.remove('hidden');
         }
@@ -901,7 +1020,6 @@
             document.getElementById('checkout-form-area').classList.remove('hidden');
             document.getElementById('modal-base-btn-area').classList.add('hidden');
             
-            // Init default bill sum
             document.getElementById('chk-grandtotal-lbl').innerText = `Rp ${rawPriceInt.toLocaleString('id-ID')}`;
         }
 
@@ -922,6 +1040,134 @@
             alert('Verified Payment Successful! Your circular order has been automatically forwarded to the respective community processor group.');
             closeProductModal();
         }
+
+        // REPORT GENERATOR ENGINE
+        function generateReport(role) {
+            const modal = document.getElementById('report-modal-overlay');
+            modal.classList.remove('hidden');
+            
+            document.getElementById('report-modal-subtitle').innerText = `Role Authority: ${role.toUpperCase()} SYSTEM`;
+
+            let contentHtml = '';
+
+            if(role === 'Domestic') {
+                contentHtml = `
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                            <span class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Segregation Accuracy</span>
+                            <span class="text-2xl font-black text-ecogreen-600">92.4%</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                            <span class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Organic Deposited</span>
+                            <span class="text-2xl font-black text-amber-500">112 kg</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                            <span class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Inorganic Deposited</span>
+                            <span class="text-2xl font-black text-blue-500">45 kg</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                            <span class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Circular Points</span>
+                            <span class="text-2xl font-black text-slate-900">4,250</span>
+                        </div>
+                    </div>
+                    <div class="bg-emerald-50 border border-emerald-200 p-5 rounded-2xl flex items-start space-x-4">
+                        <i class="fa-solid fa-leaf text-3xl text-emerald-600"></i>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-sm">Environmental Impact Summary</h4>
+                            <p class="text-xs text-slate-600 mt-1">By correctly sorting your waste this month, you successfully diverted <strong>157 kg</strong> of waste from the Sarimukti Landfill, indirectly preventing the release of approx <strong>34 kg of Methane gas</strong>.</p>
+                        </div>
+                    </div>
+                `;
+            } else if (role === 'Logistic') {
+                contentHtml = `
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                            <span class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Total Pickups</span>
+                            <span class="text-2xl font-black text-teal-600">342</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                            <span class="text-[10px] text-slate-500 font-bold uppercase block mb-1">On-Time Arrival</span>
+                            <span class="text-2xl font-black text-ecogreen-500">96.8%</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                            <span class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Fuel Efficiency</span>
+                            <span class="text-2xl font-black text-amber-500">+22.4%</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                            <span class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Total Tonnage</span>
+                            <span class="text-2xl font-black text-slate-900">4.1 Ton</span>
+                        </div>
+                    </div>
+                    <div class="bg-white border border-slate-200 p-5 rounded-2xl space-y-4">
+                        <h4 class="font-bold text-slate-900 text-sm">Micro-Route Algorithm Performance</h4>
+                        <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-teal-400 to-teal-600 h-full rounded-full" style="width: 88%"></div>
+                        </div>
+                        <p class="text-xs text-slate-500">Algorithm successfully reduced average travel distance per sector by 3.2 KM. Savings calculated at Rp 840,000 in fuel operational costs vs previous unrouted baseline.</p>
+                    </div>
+                `;
+            } else if (role === 'TPS3R') {
+                contentHtml = `
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center space-x-4">
+                            <div class="bg-amber-100 text-amber-600 p-3 rounded-xl text-xl"><i class="fa-solid fa-seedling"></i></div>
+                            <div>
+                                <span class="text-[10px] text-slate-500 font-bold uppercase block">Organic Conversion Ratio</span>
+                                <span class="text-xl font-black text-slate-900">85.2%</span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center space-x-4">
+                            <div class="bg-blue-100 text-blue-600 p-3 rounded-xl text-xl"><i class="fa-solid fa-bottle-droplet"></i></div>
+                            <div>
+                                <span class="text-[10px] text-slate-500 font-bold uppercase block">Inorganic Recovery</span>
+                                <span class="text-xl font-black text-slate-900">1.2 Tons <span class="text-[10px] font-normal text-slate-400">Sent to Recyclers</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 text-white border border-slate-800 p-5 rounded-2xl mt-4">
+                        <h4 class="font-bold text-white text-sm mb-3">Facility Bottleneck Alert</h4>
+                        <div class="flex items-center space-x-3 text-xs bg-red-500/20 text-red-300 p-3 rounded-xl border border-red-500/30">
+                            <i class="fa-solid fa-triangle-exclamation text-lg"></i>
+                            <p><strong>BSF Biopond Unit</strong> is reaching 80% maximum critical capacity over the last 3 days. Recommendation: Redirect organic surplus to Sector 02 Composting Hub starting tomorrow.</p>
+                        </div>
+                    </div>
+                `;
+            } else if (role === 'Community') {
+                contentHtml = `
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                            <span class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Products Upcycled</span>
+                            <span class="text-2xl font-black text-purple-600">328</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center">
+                            <span class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Material Claimed</span>
+                            <span class="text-2xl font-black text-ecogreen-600">845 kg</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 text-center col-span-2">
+                            <span class="text-[10px] text-slate-500 font-bold uppercase block mb-1">Marketplace Net Revenue</span>
+                            <span class="text-2xl font-black text-slate-900">Rp 4.580.000</span>
+                        </div>
+                    </div>
+                    <table class="w-full text-left text-xs bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mt-4">
+                        <thead class="bg-slate-50 border-b border-slate-200 text-slate-500 font-bold">
+                            <tr><th class="p-3">Top Selling Product</th><th class="p-3 text-right">Units Sold</th><th class="p-3 text-right">Revenue</th></tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
+                            <tr><td class="p-3">High Protein Dried BSF Maggots</td><td class="p-3 text-right">84 packs</td><td class="p-3 text-right text-ecogreen-600 font-bold">Rp 2.940.000</td></tr>
+                            <tr><td class="p-3">Super Premium Compost Fertilizer</td><td class="p-3 text-right">56 kg</td><td class="p-3 text-right text-ecogreen-600 font-bold">Rp 840.000</td></tr>
+                            <tr><td class="p-3">Upcycled Handmade Tote Bag</td><td class="p-3 text-right">12 pcs</td><td class="p-3 text-right text-ecogreen-600 font-bold">Rp 540.000</td></tr>
+                        </tbody>
+                    </table>
+                `;
+            }
+
+            document.getElementById('report-modal-content').innerHTML = contentHtml;
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal-overlay').classList.add('hidden');
+        }
+
     </script>
 </body>
 </html>
